@@ -95,7 +95,11 @@ module.exports = async (req, res) => {
     const prediction = await response.json();
     console.log('Prediction created:', prediction.id);
 
-    return res.status(200).json(prediction);
+    // ✅ FIX: Return predictionId explicitly for frontend
+    return res.status(200).json({ 
+      predictionId: prediction.id,
+      status: prediction.status
+    });
 
   } catch (error) {
     console.error('Server error:', error);
